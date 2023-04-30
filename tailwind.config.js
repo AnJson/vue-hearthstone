@@ -7,6 +7,9 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Open Sans', ...defaultTheme.fontFamily.sans]
+      },
+      colors: {
+        'hs-green-1': '#1aa572'
       }
     },
   },
