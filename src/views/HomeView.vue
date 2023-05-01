@@ -1,9 +1,27 @@
 <script setup>
-import Grid from '@/components/Grid.vue'
+import GridLayout from '@/components/GridLayout.vue'
 </script>
 
 <template>
   <main>
-    <Grid />
+    <GridLayout>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+      <div class="w-12 h-12 bg-slate-600"></div>
+    </GridLayout>
   </main>
 </template>
