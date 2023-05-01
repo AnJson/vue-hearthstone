@@ -1,5 +1,5 @@
 <script setup>
-import GridLayout from '@/components/GridLayout.vue'
+import GridLayout from '@/components/Layout/GridLayout.vue'
 </script>
 
 <template>
