@@ -1,3 +1,7 @@
+<template>
+
+</template>
+
 <script setup>
 defineProps({
   flipped: Boolean,
@@ -5,8 +9,3 @@ defineProps({
   back: String
 })
 </script>
-
-<template>
-
-</template>
-

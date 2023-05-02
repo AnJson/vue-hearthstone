@@ -1,7 +1,3 @@
-<script setup>
-import GridLayout from '@/components/Layout/GridLayout.vue'
-</script>
-
 <template>
   <main>
     <GridLayout>
@@ -25,3 +21,7 @@ import GridLayout from '@/components/Layout/GridLayout.vue'
     </GridLayout>
   </main>
 </template>
+
+<script setup>
+import GridLayout from '@/components/Utils/GridLayout.vue'
+</script>
