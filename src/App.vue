@@ -1,6 +1,11 @@
 <template>
   <Header />
-  <RouterView />
+  <Suspense>
+    <RouterView />
+    <template #fallback>
+      <h1>Loading...</h1>
+    </template>
+  </Suspense>
 </template>
 
 <script setup>

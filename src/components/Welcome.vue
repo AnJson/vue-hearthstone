@@ -1,6 +1,8 @@
 <template>
-  <div class="w-full h-full flex justify-center items-center border border-hs-green-1 rounded-md">
-      <slot></slot>
+  <div class="w-full flex justify-center items-center">
+    <h1 class="text-lg text-hs-green-1 font-semibold">
+      Choose a class to display cards.
+    </h1>
   </div>
 </template>
 
