@@ -1,4 +1,5 @@
 <template>
+  <Card />
   <main class="flex">
     <div class="flex flex-col">
       <h2 class="text-lg text-hs-green-1 font-semibold">Classes</h2>
@@ -24,6 +25,7 @@
 <script setup>
 import { ref } from 'vue'
 import Welcome from '@/components/Welcome.vue'
+import Card from '@/components/Card.vue'
 import { repository as hsRepository } from '@/repository/HsRepository.js'
 
 const data = ref(null)
@@ -34,13 +36,18 @@ const displayCards = async (className) => {
   try {
     hasError.value = false
     isLoading.value = true
-    data.value = await hsRepository.getByClass(className.toLowerCase())
+    const responseData = await hsRepository.getByClass(className.toLowerCase())
+    data.value = getCardsWithImage(responseData)
     isLoading.value = false
   } catch (error) {
     console.log(error)
     isLoading.value = false
     hasError.value = true
   }
+}
+
+const getCardsWithImage = (cards) => {
+  return cards.filter(card => card.img)
 }
 
 const classes = [
