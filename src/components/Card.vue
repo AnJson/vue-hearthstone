@@ -1,14 +1,18 @@
 <template>
   <div id="card" @click="toggleFlipped">
-    <div :class="frontClasses"></div>
-    <div :class="backClasses"></div>
+    <div :class="frontClasses">
+      <img class="h-full w-full object-contain" :src="props.front" />
+    </div>
+    <div :class="backClasses">
+      <img class="h-full w-full object-contain" :src="props.back" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   front: String,
   back: String
 })
@@ -19,7 +23,6 @@ const frontClasses = computed(() => {
   return {
     ['card-side']: true,
     ['card-side--front']: true,
-    ['bg-hs-green-1']: true,
     ['hide-front']: flipped.value
   }
 })
@@ -55,8 +58,6 @@ const toggleFlipped = () => {
   width: 100%;
   transition: all 1s ease;
   backface-visibility: hidden;
-  border-radius: 3px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, .3);
   transform-origin: 50% 50%;
 }
 

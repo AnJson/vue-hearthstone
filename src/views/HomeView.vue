@@ -1,5 +1,4 @@
 <template>
-  <Card />
   <main class="flex">
     <div class="flex flex-col">
       <h2 class="text-lg text-hs-green-1 font-semibold">Classes</h2>
@@ -18,14 +17,14 @@
       Loading...
     </h1>
     <Welcome v-else-if="!data" />
-    <h1 v-else>There is data now!</h1>
+    <CardGrid v-else :cards="data" />
   </main>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import Welcome from '@/components/Welcome.vue'
-import Card from '@/components/Card.vue'
+import CardGrid from '@/components/CardGrid.vue'
 import { repository as hsRepository } from '@/repository/HsRepository.js'
 
 const data = ref(null)
@@ -37,17 +36,13 @@ const displayCards = async (className) => {
     hasError.value = false
     isLoading.value = true
     const responseData = await hsRepository.getByClass(className.toLowerCase())
-    data.value = getCardsWithImage(responseData)
+    data.value = responseData.filter(card => card.img)
     isLoading.value = false
   } catch (error) {
     console.log(error)
     isLoading.value = false
     hasError.value = true
   }
-}
-
-const getCardsWithImage = (cards) => {
-  return cards.filter(card => card.img)
 }
 
 const classes = [
