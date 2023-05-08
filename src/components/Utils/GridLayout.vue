@@ -21,7 +21,7 @@ const gridClasses = computed(() => {
 
 <style scoped>
   .grid {
-    @apply flex flex-wrap gap-2 w-full overflow-scroll max-h-screen;
+    @apply flex flex-wrap gap-2 w-full max-h-screen;
   }
 
   .center {
