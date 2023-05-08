@@ -1,13 +1,12 @@
 <template>
   <main class="flex flex-1">
     <div class="flex flex-col">
-      <h2 class="text-lg text-hs-green-1 font-semibold">Classes</h2>
       <ul class="h-full flex flex-col list-none m-0 text-sm mr-4">
         <li
           v-for="className in classes"
           :key="className"
-          @click="displayCards(className)"
-          class="py-2 px-1 border-b cursor-pointer hover:border-hs-green-1">{{ className }}</li>
+          @click="setSelectedClass(className)"
+          :class="`py-2 px-1 border-b cursor-pointer hover:border-hs-green-1 ${selectedClass === className ? 'active' : '' }`">{{ className }}</li>
       </ul>
     </div>
     <div class="flex flex-1">
@@ -33,13 +32,30 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import CardGrid from '@/components/CardGrid.vue'
 import { repository as hsRepository } from '@/repository/HsRepository.js'
+const classes = [
+  "Death Knight",
+  "Druid",
+  "Hunter",
+  "Mage",
+  "Paladin",
+  "Priest",
+  "Rogue",
+  "Shaman",
+  "Warlock",
+  "Warrior",
+  "Dream",
+  "Neutral",
+  "Whizbang",
+  "Demon Hunter"
+]
 
 const route = useRoute()
 const router = useRouter()
+const selectedClass = ref(null)
 const data = ref([])
 const isLoading = ref(false)
 const hasError = ref(false)
@@ -74,16 +90,21 @@ const indexOfLastCurrentCard = computed(() => {
   return index < totalResult.value ? index : totalResult.value
 })
 
-const displayCards = async (className) => {
+const setSelectedClass = (className) => {
+  if (!isLoading.value) {
+    selectedClass.value = className
+  }
+}
+
+const displayCards = async () => {
   try {
-    if (!isLoading.value) {
-      router.replace({ query: {} })
-      hasError.value = false
-      isLoading.value = true
-      const responseData = await hsRepository.getByClass(className.toLowerCase())
-      data.value = responseData.filter(card => card.img)
-      isLoading.value = false
-    }
+    router.replace({ query: {} })
+    hasError.value = false
+    isLoading.value = true
+    const formattedClassName = selectedClass.value.replace(' ', '-').toLowerCase()
+    const responseData = await hsRepository.getByClass(formattedClassName)
+    data.value = responseData.filter(card => card.img)
+    isLoading.value = false
   } catch (error) {
     console.log(error)
     isLoading.value = false
@@ -91,20 +112,14 @@ const displayCards = async (className) => {
   }
 }
 
-const classes = [
-  "Death Knight",
-  "Druid",
-  "Hunter",
-  "Mage",
-  "Paladin",
-  "Priest",
-  "Rogue",
-  "Shaman",
-  "Warlock",
-  "Warrior",
-  "Dream",
-  "Neutral",
-  "Whizbang",
-  "Demon Hunter"
-]
+onMounted(() => {
+  setSelectedClass('Death Knight')
+})
+watch(selectedClass, displayCards)
 </script>
+
+<style scoped>
+.active {
+  @apply text-hs-green-1 font-bold;
+}
+</style>
