@@ -1,11 +1,13 @@
 <template>
-  <Header />
-  <Suspense>
-    <RouterView />
-    <template #fallback>
-      <h1>Loading...</h1>
-    </template>
-  </Suspense>
+  <div class="flex flex-col w-full min-h-screen">
+    <Header />
+    <Suspense>
+      <RouterView />
+      <template #fallback>
+        <h1>Loading...</h1>
+      </template>
+    </Suspense>
+  </div>
 </template>
 
 <script setup>
