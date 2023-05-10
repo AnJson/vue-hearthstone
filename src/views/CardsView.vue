@@ -16,14 +16,13 @@
       <h1 v-else-if="isLoading" class="text-lg text-hs-green-1 font-semibold">
         Loading...
       </h1>
-      <CardGrid v-else :currentPage="currentPage" :cardsToShow="8" :cards="data" />
+      <CardGrid v-else :cardsToShow="8" :cards="data" />
     </div>
   </main>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, watch, onMounted } from 'vue'
 import CardGrid from '@/components/CardGrid.vue'
 import { repository as hsRepository } from '@/repository/HsRepository.js'
 const classes = [
@@ -43,15 +42,10 @@ const classes = [
   "Demon Hunter"
 ]
 
-const route = useRoute()
-const router = useRouter()
 const selectedClass = ref(null)
 const data = ref([])
 const isLoading = ref(false)
 const hasError = ref(false)
-const currentPage = computed(() => {
-  return Number.parseInt(route.query.page || 1) 
-})
 
 const setSelectedClass = (className) => {
   if (!isLoading.value) {
@@ -61,7 +55,6 @@ const setSelectedClass = (className) => {
 
 const displayCards = async () => {
   try {
-    router.replace({ query: {} })
     hasError.value = false
     isLoading.value = true
     const formattedClassName = selectedClass.value.replace(' ', '-').toLowerCase()
